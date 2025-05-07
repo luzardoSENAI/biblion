@@ -1,40 +1,50 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { X, Menu } from 'lucide-react';
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <div className="mb-8">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+    <header className="bg-library-darkMaroon text-white p-4">
+      <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <div className="text-library-maroon mr-3">
-            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-              <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd"></path>
-            </svg>
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-library-darkMaroon">Relatórios e Estatísticas</h1>
-            <p className="text-sm text-gray-600">Visualize métricas e indicadores da sua biblioteca</p>
-          </div>
+          <button 
+            className="text-white focus:outline-none lg:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          <span className="ml-2 lg:ml-0 font-bold">Todos</span>
         </div>
-        <div className="mt-4 md:mt-0 flex space-x-3">
-          <div className="relative">
-            <button className="px-4 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 text-sm">
-              Este mês
+
+        <div className="hidden md:flex space-x-10">
+          <div className="relative group">
+            <button className="text-white focus:outline-none flex items-center">
+              Cadastro
               <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
           </div>
-          <button className="px-4 py-2 bg-white border border-library-maroon rounded-md flex items-center text-library-maroon text-sm">
-            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+          <Link to="/biblioteca" className="text-white">Biblioteca</Link>
+          <Link to="/pesquisa" className="text-white">Pesquisa</Link>
+        </div>
+
+        <div className="flex items-center">
+          <div className="text-xs mr-2 hidden md:block">
+            <div>Olá, Usuário!</div>
+            <div>Bibliotecário(a)</div>
+          </div>
+          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+            <svg className="w-5 h-5 text-library-darkMaroon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
             </svg>
-            Exportar
-          </button>
+          </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
