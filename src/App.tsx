@@ -15,6 +15,7 @@ import CadastrarLivro from "./pages/CadastrarLivro";
 import CadastrarEmprestimo from "./pages/CadastrarEmprestimo";
 import Leitores from "./pages/Leitores";
 import Pesquisa from "./pages/Pesquisa";
+import UserProfile from "./pages/UserProfile"; // New user profile page
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/cadastrar-emprestimo" element={<CadastrarEmprestimo />} />
           <Route path="/leitores" element={<Leitores />} />
           <Route path="/pesquisa" element={<Pesquisa />} />
+          <Route path="/perfil" element={<UserProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

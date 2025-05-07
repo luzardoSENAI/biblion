@@ -1,10 +1,26 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { X, Menu } from 'lucide-react';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [userName, setUserName] = useState('Usuário');
+  const [userRole, setUserRole] = useState('Bibliotecário(a)');
+  
+  // Load user data from localStorage on component mount
+  useEffect(() => {
+    const savedName = localStorage.getItem('userName');
+    const savedRole = localStorage.getItem('userRole');
+    
+    if (savedName) {
+      setUserName(savedName);
+    }
+    
+    if (savedRole) {
+      setUserRole(savedRole);
+    }
+  }, []);
   
   // Add a function to toggle sidebar visibility
   const toggleSidebar = () => {
@@ -51,15 +67,23 @@ const Header = () => {
         </div>
 
         <div className="flex items-center">
-          <div className="text-xs mr-2 hidden md:block">
-            <div>Olá, Usuário!</div>
-            <div>Bibliotecário(a)</div>
-          </div>
-          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-            <svg className="w-5 h-5 text-library-darkMaroon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-          </div>
+          <Link to="/perfil" className="text-xs mr-2 hidden md:block hover:underline">
+            <div>Olá, {userName}!</div>
+            <div>{userRole}</div>
+          </Link>
+          <Link to="/perfil" className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden">
+            {localStorage.getItem('userProfileImage') ? (
+              <img 
+                src={localStorage.getItem('userProfileImage')!} 
+                alt="User Avatar" 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <svg className="w-5 h-5 text-library-darkMaroon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            )}
+          </Link>
         </div>
       </div>
     </header>
