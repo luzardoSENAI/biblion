@@ -5,7 +5,7 @@ import { Home, Book, BookPlus, UserPlus, Users, History } from 'lucide-react';
 
 const Sidebar = () => {
   return (
-    <div className="w-64 h-screen bg-library-darkMaroon text-white fixed left-0 top-0 overflow-y-auto">
+    <div className="sidebar w-64 h-screen bg-library-darkMaroon text-white fixed left-0 top-0 overflow-y-auto">
       <div className="p-4 border-b border-library-maroon flex items-center">
         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
           <span className="text-library-darkMaroon text-2xl font-bold">U</span>

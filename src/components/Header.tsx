@@ -5,6 +5,18 @@ import { X, Menu } from 'lucide-react';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Add a function to toggle sidebar visibility
+  const toggleSidebar = () => {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (sidebar && mainContent) {
+      sidebar.classList.toggle('hidden');
+      mainContent.classList.toggle('ml-0');
+      mainContent.classList.toggle('ml-64');
+    }
+  };
 
   return (
     <header className="bg-library-darkMaroon text-white p-4">
@@ -16,7 +28,13 @@ const Header = () => {
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-          <span className="ml-2 lg:ml-0 font-bold">Todos</span>
+          <button
+            onClick={toggleSidebar}
+            className="ml-2 lg:ml-0 font-bold flex items-center"
+          >
+            <Menu size={20} className="mr-2" />
+            <span>Todos</span>
+          </button>
         </div>
 
         <div className="hidden md:flex space-x-10">
